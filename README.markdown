@@ -3,8 +3,8 @@ typeset all those delicious Rust docs
 huge props to the guys who wrote _over five hundred pages_ of
 excellent documentation
 
-- paper size is a4, with cam/crop down to a paperback size for a large
-technical publishing house
+- paper size is a4, with cam/crop down to a paperback size for a
+Certain Large Technical Publishing House
 
 - the styles try to emulate rustbook/rustdoc (Fira Sans, Source Serif
 Pro/Heuristica, Source Code Pro) but fall short in a few places
