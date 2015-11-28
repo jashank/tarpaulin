@@ -1,62 +1,71 @@
-typeset all those delicious Rust docs
+Typeset all those delicious Rust docs.
 
-huge props to the guys who wrote _over five hundred pages_ of
-excellent documentation
+Huge props to everyone who's contributed to the body of _over five
+hundred pages_ of excellent documentation for Rust.  You all rock!
 
-- paper size is a4, with cam/crop down to a paperback size for a
-Certain Large Technical Publishing House
+### Assorted style notes
 
-- the styles try to emulate rustbook/rustdoc (Fira Sans, Source Serif
-Pro/Heuristica, Source Code Pro) but fall short in a few places
+- The styles I've built try to emulate `rustbook`/`rustdoc` (Fira
+Sans, Source Serif Pro/Heuristica, Source Code Pro) but do fall short
+in a few places (see below).
 
-make it build:
+- The styles are also focussed on producing a dead-tree format book.
+For that reason, content structure decisions like the calculation of
+hierarchy by parts/chapters/sections are made how they are.  I also
+like the idea of a dead-tree Rust book that mostly stands alone and
+acts as both tutorial and reference separately. 
 
-- have an up-to-date-ish TeX installation. LuaLaTeX or XeLaTeX are a
-  hard requirement, as are a whole bag of packages. easy way out:
-  install TeX Live (i believe v2013 is the earliest working version
-  and you almost certainly want something more recent. i use v2014.)
+- The size of each PDF page is A4 (ISO paper forever!), but the
+cam/crop marks take it down to 230x180mm, the paperback size for a
+Certain Large Technical Publishing House.
 
-- have an up-to-date-ish Pandoc. who doesn't love Pandoc?
+### Build it!
 
-- have a rust source tree in ../rust relative to this checkout
+- Have an up-to-date-ish TeX installation.  Easy way out: install
+TeX Live (i believe v2013 is the earliest working version and you
+almost certainly want something more recent; I use v2014) which gets
+you all the dependencies, including LuaLaTeX, fontspec, geometry,
+hyperref, etc.
+
+- Have an up-to-date-ish Pandoc. Who doesn't love Pandoc?
+
+- Have a Rust source tree in `../rust` relative to this checkout.  It
+needs to be newer than rust-lang/rust@024aa9a345
 
 - `(cd fonts && make)` to download OpenType versions of Fira Sans,
   Source Serif Pro, Heuristica, and Source Code Pro from your local
   CTAN mirror.
 
-- `zsh build.sh` (may work with bash but i haven't tested this) which
-  grabs ../rust/src/doc, and processes the Book, the Rustonomicon,
-  and the grammar and reference (i call this collectively "langref")
+- `zsh build.sh` (which may also work with bash but I haven't tested
+this) which grabs `../rust/src/doc`, and processes `book`, `nomicon`,
+and `grammar` and `reference` into TeX.
 
 - `(cd tex && make)` to ACTUALLY DO THE THING
 
-if you opted to use XeLaTeX, you'll need to edit `tex/project.mk` and
-set `ENGINE` to `xe`.
+### Remaining Work
 
-remaining work:
+- Get TeX's grubby fingers off the quotes. grr.
 
-- get TeX's grubby fingers off the quotes. grr.
+- Process out rustdoc's `//#` syntax.
 
-- process out rustdoc's `//#` syntax
+- Mangle the document references, which, while all self-complete
+(currently excepting the library stuff) don't work; not entirely sure
+how to tackle this one. 
 
-- mangle the document references, which, while all self-complete
-  (currently excepting the library stuff) don't work.  not entirely
-  sure how to tackle this one. 
+- Wrangle some of the line lengths in the code samples (thankfully
+scaling ttfamily to 0.857142 was enough to get from ~60 to ~72
+characters per line, which is just enough to lower the _screaming_
+about overfull hboxes to a mere wailing)
 
-- wrangle some of the line lengths in the code samples (thankfully
-  scaling ttfamily to 0.857142 was enough to get from ~60 to ~72
-  characters per line, which is just enough to stop the _screaming_
-  about overfull hboxes)
+- Tangle syntax highlighting back in.  pandoc's highlighting engine
+doesn't work with my approach; one of the LaTeX ones might, though.
 
-- tangle syntax highlighting. pandoc's highlighting engine doesn't
-  work with my approach; one of the LaTeX ones might, though
+- Fandangle up a tool that typesets crate documentation into something
+acceptable for a book.  I think this means I have to take `rustdoc`'s
+JSON output and somehow coerce that to LaTeX. 
 
-
-- fandangle up a tool that typesets crate documentation into something
-  acceptable for a book.  i think this means i have to take rustdoc's
-  JSON output and somehow coerce that to LaTeX.
-
-note that the rust logo appears here without proper permission. my
-reading of the legal stuff suggests it's _probably_ okay as this is
-not attempting to dilute rust or the logo's value.  if it needs to be
-taken down, i'm happy to oblige. 
+Note that the Rust logo, a trademark of the Mozilla Foundation,
+appears here without official permission.  Nobody has yet C&D'd at me,
+and my reading of the legal stuff suggests it's _probably_ okay.  The
+typeset result is not attempting to dilute either the wordmark or the
+logo's value.
