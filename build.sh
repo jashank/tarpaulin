@@ -7,6 +7,11 @@ mkdir -p tex/book
 mkdir -p tex/nomicon
 mkdir -p tex/langref
 
+vers=$((cd ../rust && grep "CFG_RELEASE_NUM\=" mk/main.mk | sed -e 's/^.*=//'))
+hash=$((cd ../rust && cat .git/refs/heads/master | cut -c-10))
+
+echo "${vers} at \\texttt{${hash}}." > tex/version.tex
+
 echo '\\input{book/README}' > tex/book/book.tex
 (cat src/doc/book/SUMMARY.md \
      | grep '\*' \
