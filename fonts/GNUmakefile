@@ -29,7 +29,7 @@ define font_fetch_set
 CLEANABLES += $$(foreach style,$$(${1}_styles),${1}-$${style}.$$(${1}_format))
 
 $(1)-%.$$(${1}_format)::
-	@fetch $$(${1}_url)/$$@
+	@wget $$(${1}_url)/$$@
 
 $(1):: $$(foreach style,$$(${1}_styles),${1}-$${style}.$$(${1}_format))
 	@true
